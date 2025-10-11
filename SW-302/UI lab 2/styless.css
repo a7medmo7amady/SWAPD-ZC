@@ -1,0 +1,95 @@
+
+body {
+    font-family: sans-serif;
+    /* background-color: #f4f4f9; */
+     background-color: #232b2b;
+    color: #333;
+    padding: 20px;
+}
+.Name{
+ background-color: #7B542F;
+  color: white;
+  border: 3px solid black;
+  margin: 10px;
+  padding:10px;
+}
+header {
+    padding: 40px 20px;
+    text-align: center;
+    color:#7B542F; 
+    border-radius: 15px;
+    background-image: linear-gradient(#FF9D00,#7B542F);
+    box-shadow: 2px 2px #888888; 
+}
+section {
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 700px;
+    background-color:#888888;
+    border-radius: 8px; 
+}
+
+#about{
+
+ background-color: #7B542F;
+  color: white;
+  border: 3px solid black;
+  margin: 10px;
+  padding:10px;
+}
+h1 {
+  font-family: verdana;
+  font-size: 50px;
+  color: #B6771D;
+  text-align: center;
+  text-shadow: 2px 2px #7B542F; 
+  margin-bottom: 90px; 
+  
+}
+
+h3 {
+  font-family: verdana;
+  font-size: 30px;
+  color: #FF9D00;
+  text-align: center;
+}
+p {
+  font-family: verdana;
+  font-size: 20px;
+  color: #FFCF71;
+  text-align: center;
+}
+/* button:hover{
+    background-color: hsl(187, 86%, 47%);
+    color: #19ac0e;
+    border-radius: 5px;
+    ce
+} */
+table, th, td {
+    border: 5px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: dashed;
+}
+#image{
+    display: block; /* Make the image a block element */
+    width: 60%; /* Define a width */
+    margin-left: auto;
+    margin-right: auto;
+    border-style: dotted;
+}
+button:hover{
+    background-color: hsl(187, 86%, 47%);
+    color: #19ac0e;
+    border-radius: 5px;
+    border-style: solid;
+}
+nav{
+    display: block; 
+    width: 40%; 
+    
+    margin-left: auto;
+    margin-right: auto;
+
+}
