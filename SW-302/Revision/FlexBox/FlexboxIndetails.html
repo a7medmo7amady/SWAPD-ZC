@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Exploration Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #34495e;
+            margin: 30px 0 15px 0;
+            padding: 10px;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .description {
+            background: #ecf0f1;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        /* Example 1: Traditional vs Flexbox */
+        .traditional-container {
+            background: #ffe6e6;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid #e74c3c;
+            border-radius: 5px;
+        }
+
+        .traditional-button {
+            float: left;
+            margin-right: 10px;
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .flex-container {
+            display: flex;
+            gap: 10px;
+            background: #e6ffe6;
+            padding: 20px;
+            border: 2px solid #27ae60;
+            border-radius: 5px;
+        }
+
+        .flex-button {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Example 2: Flex Direction */
+        .flex-row {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            background: #e8f4f8;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .flex-column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #fff4e6;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .flex-item {
+            padding: 15px;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Example 3: Justify Content */
+        .justify-start {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            background: #f0e6ff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .justify-center {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            background: #ffe6f0;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .justify-end {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            background: #e6f7ff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .justify-between {
+            display: flex;
+            justify-content: space-between;
+            background: #f0fff0;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .justify-around {
+            display: flex;
+            justify-content: space-around;
+            background: #fff9e6;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .justify-evenly {
+            display: flex;
+            justify-content: space-evenly;
+            background: #ffe6e6;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        /* Example 4: Align Items */
+        .align-container {
+            display: flex;
+            align-items: center;
+            height: 150px;
+            background: #e8f4f8;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 2px dashed #3498db;
+        }
+
+        .align-stretch {
+            display: flex;
+            align-items: stretch;
+            height: 150px;
+            background: #f0e6ff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 2px dashed #9b59b6;
+        }
+
+        .align-start {
+            display: flex;
+            align-items: flex-start;
+            height: 150px;
+            background: #ffe6f0;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 2px dashed #e91e63;
+        }
+
+        .align-end {
+            display: flex;
+            align-items: flex-end;
+            height: 150px;
+            background: #e6f7ff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 2px dashed #03a9f4;
+        }
+
+        /* Example 5: Flex Wrap */
+        .flex-wrap-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: #f0fff0;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .flex-nowrap-container {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 10px;
+            background: #fff9e6;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .wide-item {
+            padding: 15px 40px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* Example 6: Flex Grow/Shrink */
+        .grow-container {
+            display: flex;
+            gap: 10px;
+            background: #e8f4f8;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .grow-1 {
+            flex-grow: 1;
+            padding: 15px;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .grow-2 {
+            flex-grow: 2;
+            padding: 15px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .no-grow {
+            flex-grow: 0;
+            padding: 15px;
+            background: #95a5a6;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Example 7: Real-World - Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #2c3e50;
+            padding: 15px 30px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: #34495e;
+        }
+
+        /* Example 8: Real-World - Card Layout */
+        .card-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .card {
+            flex: 1 1 250px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        /* Example 9: Center Anything */
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .centered-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Interactive Controls */
+        .controls {
+            background: #34495e;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .controls label {
+            color: white;
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .controls select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .interactive-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 10px;
+            background: #ecf0f1;
+            padding: 20px;
+            min-height: 200px;
+            border-radius: 5px;
+            border: 2px solid #3498db;
+        }
+
+        .interactive-item {
+            padding: 20px;
+            background: #3498db;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            min-width: 80px;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .quiz-question {
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .experiment-task {
+            background: #d1ecf1;
+            border: 2px solid #17a2b8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .experiment-task h4 {
+            color: #0c5460;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎯 Flexbox Interactive Exploration Lab</h1>
+
+    <!-- Section 1: The Problem -->
+    <div class="section">
+        <h2>1. The Problem: Before Flexbox</h2>
+        <div class="description">
+            <strong>🤔 Question:</strong> Look at the traditional approach below. What happens if you resize your browser window? What problems do you notice?
+        </div>
+
+        <h3>Traditional Approach (float-based):</h3>
+        <div class="code-block">
+&lt;div class="traditional-container clearfix"&gt;
+    &lt;button class="traditional-button"&gt;Button 1&lt;/button&gt;
+    &lt;button class="traditional-button"&gt;Button 2&lt;/button&gt;
+    &lt;button class="traditional-button"&gt;Button 3&lt;/button&gt;
+    &lt;button class="traditional-button"&gt;Button 4&lt;/button&gt;
+    &lt;button class="traditional-button"&gt;Button 5&lt;/button&gt;
+&lt;/div&gt;
+        </div>
+
+        <div class="traditional-container clearfix">
+            <button class="traditional-button">Button 1</button>
+            <button class="traditional-button">Button 2</button>
+            <button class="traditional-button">Button 3</button>
+            <button class="traditional-button">Button 4</button>
+            <button class="traditional-button">Button 5</button>
+        </div>
+
+        <h3>Flexbox Approach:</h3>
+        <div class="code-block">
+&lt;div class="flex-container"&gt;
+    &lt;button class="flex-button"&gt;Button 1&lt;/button&gt;
+    &lt;button class="flex-button"&gt;Button 2&lt;/button&gt;
+    &lt;button class="flex-button"&gt;Button 3&lt;/button&gt;
+    &lt;button class="flex-button"&gt;Button 4&lt;/button&gt;
+    &lt;button class="flex-button"&gt;Button 5&lt;/button&gt;
+&lt;/div&gt;
+
+CSS:
+.flex-container {
+    display: flex;
+    gap: 10px;
+}
+        </div>
+
+        <div class="flex-container">
+            <button class="flex-button">Button 1</button>
+            <button class="flex-button">Button 2</button>
+            <button class="flex-button">Button 3</button>
+            <button class="flex-button">Button 4</button>
+            <button class="flex-button">Button 5</button>
+        </div>
+
+        <div class="experiment-task">
+            <h4>🧪 Experiment #1:</h4>
+            <p>1. Open your browser's developer tools (F12)</p>
+            <p>2. Try resizing the window narrow and wide</p>
+            <p>3. What differences do you see between the two approaches?</p>
+            <p>4. Which one handles spacing better?</p>
+        </div>
+    </div>
+
+    <!-- Section 2: Flex Direction -->
+    <div class="section">
+        <h2>2. Flex Direction: The Main Axis</h2>
+        <div class="description">
+            <strong>🤔 Think:</strong> Flexbox layouts items along one axis. What do you think "flex-direction" controls?
+        </div>
+
+        <h3>Row (Horizontal) - Default:</h3>
+        <div class="code-block">
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+        </div>
+        <div class="flex-row">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+            <div class="flex-item">4</div>
+        </div>
+
+        <h3>Column (Vertical):</h3>
+        <div class="code-block">
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+        </div>
+        <div class="flex-column">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+            <div class="flex-item">4</div>
+        </div>
+
+        <div class="experiment-task">
+            <h4>🧪 Experiment #2:</h4>
+            <p>Right-click on one of the containers above → Inspect → Try changing flex-direction to:</p>
+            <p>• row-reverse</p>
+            <p>• column-reverse</p>
+            <p>What happens to the order?</p>
+        </div>
+    </div>
+
+    <!-- Section 3: Justify Content -->
+    <div class="section">
+        <h2>3. Justify Content: Spacing Along Main Axis</h2>
+        <div class="description">
+            <strong>🤔 Question:</strong> How would you describe what each justify-content value does?
+        </div>
+
+        <h3>flex-start:</h3>
+        <div class="justify-start">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+        </div>
+
+        <h3>center:</h3>
+        <div class="justify-center">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+        </div>
+
+        <h3>flex-end:</h3>
+        <div class="justify-end">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+        </div>
+
+        <h3>space-between:</h3>
+        <div class="justify-between">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+        </div>
+
+        <h3>space-around:</h3>
+        <div class="justify-around">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+        </div>
+
+        <h3>space-evenly:</h3>
+        <div class="justify-evenly">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+        </div>
+
+        <div class="experiment-task">
+            <h4>🧪 Experiment #3:</h4>
+            <p>Look at space-between, space-around, and space-evenly.</p>
+            <p>• What's the difference in spacing?</p>
+            <p>• When would you use each one?</p>
+            <p>• Try adding a 4th item - does the pattern change?</p>
+        </div>
+    </div>
+
+    <!-- Section 4: Align Items -->
+    <div class="section">
+        <h2>4. Align Items: Cross-Axis Alignment</h2>
+        <div class="description">
+            <strong>🤔 Challenge:</strong> If justify-content works on the main axis, what axis do you think align-items works on?
+        </div>
+
+        <h3>center (vertical centering!):</h3>
+        <div class="align-container">
+            <div class="flex-item">Short</div>
+            <div class="flex-item">Taller<br>Item</div>
+            <div class="flex-item">Tallest<br>Item<br>Here</div>
+        </div>
+
+        <h3>stretch (fills available height):</h3>
+        <div class="align-stretch">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+        </div>
+
+        <h3>flex-start (top):</h3>
+        <div class="align-start">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+        </div>
+
+        <h3>flex-end (bottom):</h3>
+        <div class="align-end">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+        </div>
+    </div>
+
+    <!-- Section 5: Flex Wrap -->
+    <div class="section">
+        <h2>5. Flex Wrap: Responsive Behavior</h2>
+        <div class="description">
+            <strong>🤔 Predict:</strong> Resize your window. What do you think will happen with wrap vs nowrap?
+        </div>
+
+        <h3>flex-wrap: wrap (items move to next line):</h3>
+        <div class="flex-wrap-container">
+            <div class="wide-item">Item 1</div>
+            <div class="wide-item">Item 2</div>
+            <div class="wide-item">Item 3</div>
+            <div class="wide-item">Item 4</div>
+            <div class="wide-item">Item 5</div>
+            <div class="wide-item">Item 6</div>
+        </div>
+
+        <h3>flex-wrap: nowrap (items shrink):</h3>
+        <div class="flex-nowrap-container">
+            <div class="wide-item">Item 1</div>
+            <div class="wide-item">Item 2</div>
+            <div class="wide-item">Item 3</div>
+            <div class="wide-item">Item 4</div>
+            <div class="wide-item">Item 5</div>
+            <div class="wide-item">Item 6</div>
+        </div>
+
+        <div class="experiment-task">
+            <h4>🧪 Experiment #4:</h4>
+            <p>Slowly make your browser window narrower and watch what happens to each container.</p>
+            <p>• Which is better for responsive design?</p>
+            <p>• When might nowrap be useful?</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. Flex Grow: Distributing Extra Space</h2>
+        <div class="description">
+            <strong>🤔 Think:</strong> What do the numbers in flex-grow represent?
+        </div>
+
+        <div class="code-block">
+.grow-1 { flex-grow: 1; }  /* Takes 1 part of extra space */
+.grow-2 { flex-grow: 2; }  /* Takes 2 parts of extra space */
+.no-grow { flex-grow: 0; } /* Doesn't grow */
+        </div>
+
+        <div class="grow-container">
+            <div class="no-grow">Fixed</div>
+            <div class="grow-1">Grow 1x</div>
+            <div class="grow-2">Grow 2x</div>
+        </div>
+
+        <div class="experiment-task">
+            <h4>🧪 Experiment #5:</h4>
+            <p>Resize the window wider. Notice how the "Grow 2x" item gets twice as much extra space as "Grow 1x".</p>
+            <p>Try changing the flex-grow values in dev tools to see different ratios!</p>
+        </div>
+    </div>
+
+    <!-- Section 7: Real-World Navigation -->
+    <div class="section">
+        <h2>7. Real-World Example: Navigation Bar</h2>
+        <div class="description">
+            <strong>🤔 Analysis:</strong> How is Flexbox being used here to create this layout?
+        </div>
+
+        <div class="code-block">
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+        </div>
+
+        <nav class="navbar">
+            <div class="logo">MyLogo</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <div class="experiment-task">
+            <h4>🧪 Experiment #6:</h4>
+            <p>Inspect the navbar. Try changing justify-content to different values.</p>
+            <p>• What happens with 'center'?</p>
+            <p>• What about 'flex-start'?</p>
+        </div>
+    </div>
+    <div class="section">
+        <h2>8. Real-World Example: Responsive Card Grid</h2>
+        <div class="description">
+            <strong>Challenge:</strong> This layout adapts to screen size. How does it work?
+        </div>
+
+        <div class="code-block">
+.card-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex: 1 1 250px;  /* grow shrink basis */
+}
+        </div>
+
+        <div class="card-container">
+            <div class="card">
+                <h3>Card 1</h3>
+                <p>This is a flexible card that grows and shrinks based on available space.</p>
+            </div>
+            <div class="card">
+                <h3>Card 2</h3>
+                <p>Resize your browser to see how the cards adapt!</p>
+            </div>
+            <div class="card">
+                <h3>Card 3</h3>
+                <p>When there's not enough space, cards wrap to the next line.</p>
+            </div>
+        </div>
+
+        <div class="experiment-task">
+            <h4>Experiment #7:</h4>
+            <p>Slowly resize your browser window and watch the cards:</p>
+            <p>• How many cards fit per row at different widths?</p>
+            <p>• What's the minimum width before they wrap?</p>
+            <p>• Try changing "flex: 1 1 250px" to "flex: 1 1 400px" - what happens?</p>
+        </div>
+    </div>
+    <div class="section">
+        <h2>9. The Famous Centering Problem - SOLVED!</h2>
+        <div class="description">
+            <strong>The Old Problem:</strong> "How do I center a div?" was one of CSS's biggest challenges. Flexbox makes it trivial!
+        </div>
+
+        <div class="code-block">
+.center-container {
+    display: flex;
+    justify-content: center;  /* horizontal */
+    align-items: center;       /* vertical */
+    height: 200px;
+}
+        </div>
+
+        <div class="center-container">
+            <div class="centered-content">
+                <h3>Perfectly Centered!</h3>
+                <p>Both horizontally and vertically!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>10.Interactive Playground</h2>
+        <div class="description">
+            <strong>Now YOU control it!</strong> Use the dropdowns below to experiment with different Flexbox properties.
+        </div>
+
+        <div class="controls">
+            <label for="direction">flex-direction:</label>
+            <select id="direction" onchange="updateFlex()">
+                <option value="row">row</option>
+                <option value="row-reverse">row-reverse</option>
+                <option value="column">column</option>
+                <option value="column-reverse">column-reverse</option>
+            </select>
+
+            <label for="justify">justify-content:</label>
+            <select id="justify" onchange="updateFlex()">
+                <option value="flex-start">flex-start</option>
+                <option value="center">center</option>
+                <option value="flex-end">flex-end</option>
+                <option value="space-between">space-between</option>
+                <option value="space-around">space-around</option>
+                <option value="space-evenly">space-evenly</option>
+            </select>
+
+            <label for="align">align-items:</label>
+            <select id="align" onchange="updateFlex()">
+                <option value="flex-start">flex-start</option>
+                <option value="center">center</option>
+                <option value="flex-end">flex-end</option>
+                <option value="stretch">stretch</option>
+            </select>
+
+            <label for="wrap">flex-wrap:</label>
+            <select id="wrap" onchange="updateFlex()">
+                <option value="nowrap">nowrap</option>
+                <option value="wrap">wrap</option>
+                <option value="wrap-reverse">wrap-reverse</option>
+            </select>
+        </div>
+
+        <div class="interactive-container" id="playground">
+            <div class="interactive-item">1</div>
+            <div class="interactive-item">2</div>
+            <div class="interactive-item">3</div>
+            <div class="interactive-item">4</div>
+            <div class="interactive-item">5</div>
+        </div>
+    </div>
+
+    <div class="quiz-section">
+        <h2> Quick Understanding Check</h2>
+        
+        <div class="quiz-question">
+            1. In your own words, what does "display: flex" do to an element?
+        </div>
+        
+        <div class="quiz-question">
+            2. What's the difference between justify-content and align-items?
+        </div>
+        
+        <div class="quiz-question">
+            3. When would you use flex-wrap: wrap versus flex-wrap: nowrap?
+        </div>
+        
+        <div class="quiz-question">
+            4. Look at Example #8 (Card Layout). Why is the flex property written as "flex: 1 1 250px" instead of just "flex: 1"? What do the three values mean?
+        </div>
+
+        <div class="experiment-task">
+            <h4>🏆 Final Challenge:</h4>
+            <p>Using only Flexbox, try to recreate a common layout pattern:</p>
+            <p><strong>Holy Grail Layout:</strong> Header at top, Footer at bottom, and three columns in the middle (sidebar-main-sidebar).</p>
+            <p>Hint: You might need nested flex containers!</p>
+        </div>
+    </div>
+
+    <script>
+        function updateFlex() {
+            const playground = document.getElementById('playground');
+            const direction = document.getElementById('direction').value;
+            const justify = document.getElementById('justify').value;
+            const align = document.getElementById('align').value;
+            const wrap = document.getElementById('wrap').value;
+
+            playground.style.flexDirection = direction;
+            playground.style.justifyContent = justify;
+            playground.style.alignItems = align;
+            playground.style.flexWrap = wrap;
+        }
+    </script>
+</body>
+</html>
